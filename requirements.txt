@@ -1,0 +1,27 @@
+# PySpark & Spark integration
+pyspark==3.5.1
+
+# Data acquisition
+kagglehub>=0.2.0
+
+# Database
+psycopg2-binary>=2.9.9
+SQLAlchemy>=2.0.0
+
+# API Backend
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+python-dotenv>=1.0.1
+pydantic>=2.6.0
+prometheus-fastapi-instrumentator>=6.1.0
+httpx2>=0.28.0
+
+# dbt Core
+dbt-core>=1.7.0
+dbt-postgres>=1.7.0
+
+# Utilities
+pandas>=2.2.0
+openpyxl>=3.1.0
+pytest>=8.0.0
+requests>=2.31.0

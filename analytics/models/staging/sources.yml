@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: serving
+    schema: serving
+    tables:
+      - name: fact_sales_daily
+      - name: fact_sales_weekly
+      - name: fact_sales_monthly
+      - name: fact_sales_yearly
+      - name: dim_sales_revenue_by_state
+      - name: dim_sales_revenue_by_city
+      - name: dim_sales_revenue_by_seller
+      - name: dim_sales_revenue_by_category
+      - name: dim_sales_top_selling_products
+      - name: fact_sales_average_order_value
+      - name: dim_customers_clv
+      - name: dim_customers_top_cities
+      - name: fact_customers_repeat_stats
+      - name: dim_products_performance
+      - name: dim_products_category_performance
+      - name: fact_payments_method_dist
+      - name: fact_payments_installments
+      - name: fact_logistics_delivery_by_state
+      - name: fact_logistics_delivery_success_rates
+      - name: fact_logistics_seller_shipping_perf
+      - name: fact_executive_kpis

@@ -1,0 +1,24 @@
+# Render Infrastructure as Code configuration file
+# Ref: https://render.com/docs/yaml-spec
+
+services:
+  # ── FastAPI Backend Web Service ────────────────────────────
+  - type: web
+    name: prism-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.backend.app:app --host 0.0.0.0 --port $PORT --workers 2 --log-level info
+    healthCheckPath: /api/v1/health
+    numInstances: 1
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: DATABASE_URL
+        sync: false # Must be set in Render Web Dashboard
+      - key: CORS_ORIGINS
+        value: "https://prism-dashboard.vercel.app" # Customize to your actual Vercel domain

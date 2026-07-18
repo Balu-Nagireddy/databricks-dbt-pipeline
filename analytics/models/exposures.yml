@@ -1,0 +1,28 @@
+version: 2
+
+exposures:
+  - name: fastapi_analytics_service
+    label: FastAPI Analytics REST API
+    type: application
+    maturity: high
+    description: "Read-only REST API endpoints serving executive KPIs, logistics data, and financial performance."
+    owner:
+      name: Data Platform Team
+      email: data-eng@prism.internal
+    depends_on:
+      - ref('fct_executive_kpis')
+      - ref('fct_logistics_delivery_success_rates')
+      - ref('fct_payments_method_dist')
+
+  - name: react_executive_dashboard
+    label: React Executive Dashboard UI
+    type: dashboard
+    maturity: medium
+    description: "Executive-facing BI dashboard showing live financial metrics, delivery success rates, and customer value segmentation."
+    owner:
+      name: BI & Analytics Team
+      email: bi@prism.internal
+    depends_on:
+      - ref('fct_executive_kpis')
+      - ref('dim_customers_clv')
+      - ref('dim_sales_revenue_by_state')

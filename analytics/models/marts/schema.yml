@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: fct_sales_daily
+    description: "Daily sales metrics including total revenue and order count."
+    columns:
+      - name: sale_date
+        description: "The date of the sales aggregations."
+        tests:
+          - unique
+          - not_null
+      - name: total_revenue
+        description: "Total revenue generated on this date."
+        tests:
+          - not_null
+      - name: total_orders
+        description: "Total order count on this date."
+
+  - name: dim_sales_revenue_by_state
+    description: "Aggregated sales revenue and order counts grouped by customer state."
+    columns:
+      - name: customer_state
+        description: "The state of the customers."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_sales_revenue_by_city
+    description: "Aggregated sales revenue and order counts grouped by customer city and state."
+    columns:
+      - name: customer_city
+        description: "The city of the customers."
+        tests:
+          - not_null
+      - name: customer_state
+        description: "The state of the customers."
+        tests:
+          - not_null
+
+  - name: dim_customers_clv
+    description: "Customer Lifetime Value (CLV) dimension with segments."
+    columns:
+      - name: customer_unique_id
+        description: "Unique identifier for the customer."
+        tests:
+          - unique
+          - not_null
+      - name: lifetime_value
+        description: "Lifetime value (spend) of the customer."
+      - name: customer_segment
+        description: "Calculated customer segment (e.g. VIP, Regular, etc.)."
+        tests:
+          - accepted_values:
+              values: ['VIP', 'High Value', 'Standard']
+
+  - name: fct_executive_kpis
+    description: "Curated high-level business performance metrics for executive reporting."
+    columns:
+      - name: total_revenue
+        description: "Platform total cumulative revenue."
+        tests:
+          - not_null
+      - name: total_orders
+        description: "Platform total cumulative orders."
