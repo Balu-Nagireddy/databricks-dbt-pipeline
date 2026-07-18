@@ -37,17 +37,17 @@ export default function LogisticsPage() {
       <div className="page-header">
         <div>
           <h1 className="page-header__title">Logistics Analytics</h1>
-          <p className="page-header__sub">Delivery performance, state analysis & seller shipping</p>
+          <p className="page-header__sub">Delivery performance, state analysis &amp; seller shipping</p>
         </div>
       </div>
 
       <div className="page-body">
         {/* KPI row */}
-        <div className="grid grid-4" style={{ marginBottom: 20 }}>
+        <div className="grid grid-4">
           {kpis.map((k, i) => <KPICard key={i} {...k} loading={success.isLoading} />)}
         </div>
 
-        <div className="grid grid-2" style={{ marginBottom: 20 }}>
+        <div className="grid grid-2">
           {/* Avg delivery days by state */}
           <ChartCard title="Avg Delivery Days by State">
             {perf.isLoading ? <ChartSkeleton height={260} /> :
@@ -87,9 +87,9 @@ export default function LogisticsPage() {
         <div className="card">
           <div className="card__title">Delivery Performance by State</div>
           {perf.isLoading ? (
-            <div>{[...Array(6)].map((_,i) => <div key={i} className="skeleton skeleton-text" style={{ marginBottom: 10 }} />)}</div>
+            <div>{[...Array(6)].map((_,i) => <div key={i} className="skeleton skeleton-text" />)}</div>
           ) : perf.isError ? <ErrorState /> : (
-            <div style={{ overflowX: 'auto' }}>
+            <div className="table-wrapper">
               <table className="data-table">
                 <thead><tr><th>State</th><th>Total Orders</th><th>Avg Delivery Days</th></tr></thead>
                 <tbody>

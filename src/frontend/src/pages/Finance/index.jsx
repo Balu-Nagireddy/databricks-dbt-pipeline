@@ -25,12 +25,12 @@ export default function FinancePage() {
       <div className="page-header">
         <div>
           <h1 className="page-header__title">Finance Analytics</h1>
-          <p className="page-header__sub">Payment methods, installments & transaction analysis</p>
+          <p className="page-header__sub">Payment methods, installments &amp; transaction analysis</p>
         </div>
       </div>
 
       <div className="page-body">
-        <div className="grid grid-2" style={{ marginBottom: 20 }}>
+        <div className="grid grid-2">
           {/* Payment method pie */}
           <ChartCard title="Payment Method Distribution (by transactions)">
             {payments.isLoading ? <ChartSkeleton height={240} /> :
@@ -85,24 +85,26 @@ export default function FinancePage() {
         </ChartCard>
 
         {/* Payments summary table */}
-        <div className="card" style={{ marginTop: 20 }}>
+        <div className="card">
           <div className="card__title">Payment Methods Summary</div>
           {payments.isLoading ? (
-            <div>{[...Array(4)].map((_,i) => <div key={i} className="skeleton skeleton-text" style={{ marginBottom: 10 }} />)}</div>
+            <div>{[...Array(4)].map((_,i) => <div key={i} className="skeleton skeleton-text" />)}</div>
           ) : payments.isError ? <ErrorState /> : (
-            <table className="data-table">
-              <thead><tr><th>Payment Type</th><th>Transactions</th><th>Total Value</th><th>Avg Transaction</th></tr></thead>
-              <tbody>
-                {(payments.data ?? []).map(r => (
-                  <tr key={r.payment_type}>
-                    <td style={{ textTransform: 'capitalize', fontWeight: 500 }}>{r.payment_type}</td>
-                    <td>{fmt(r.transaction_count)}</td>
-                    <td style={{ color: 'var(--indigo-l)', fontWeight: 600 }}>{fmtCurrency(r.total_payment_value)}</td>
-                    <td>{fmtCurrency(r.avg_transaction_value)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="table-wrapper">
+              <table className="data-table">
+                <thead><tr><th>Payment Type</th><th>Transactions</th><th>Total Value</th><th>Avg Transaction</th></tr></thead>
+                <tbody>
+                  {(payments.data ?? []).map(r => (
+                    <tr key={r.payment_type}>
+                      <td style={{ textTransform: 'capitalize', fontWeight: 500 }}>{r.payment_type}</td>
+                      <td>{fmt(r.transaction_count)}</td>
+                      <td style={{ color: 'var(--indigo-l)', fontWeight: 600 }}>{fmtCurrency(r.total_payment_value)}</td>
+                      <td>{fmtCurrency(r.avg_transaction_value)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>

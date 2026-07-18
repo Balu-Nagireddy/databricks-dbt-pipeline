@@ -2,10 +2,10 @@ import { AlertTriangle, Inbox } from 'lucide-react'
 
 export function ErrorState({ message = 'Failed to load data.' }) {
   return (
-    <div className="error-state">
+    <div className="error-state" role="alert">
       <AlertTriangle size={32} />
       <h4>Something went wrong</h4>
-      <p style={{ fontSize: '0.8125rem', color: '#94a3b8' }}>{message}</p>
+      <p className="error-state__msg">{message}</p>
     </div>
   )
 }
@@ -15,7 +15,7 @@ export function EmptyState({ message = 'No data available.' }) {
     <div className="empty-state">
       <Inbox size={40} />
       <h4>No results</h4>
-      <p style={{ fontSize: '0.8125rem' }}>{message}</p>
+      <p className="empty-state__msg">{message}</p>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom'
+import { Menu } from 'lucide-react'
 
 const titles = {
   '/':          { label: 'Executive',  sub: 'Platform-wide KPIs & business overview' },
@@ -9,22 +10,42 @@ const titles = {
   '/logistics': { label: 'Logistics',  sub: 'Delivery performance & shipping metrics' },
 }
 
-export function Topbar() {
+/**
+ * Adaptive Topbar — shows hamburger button in overlay mode.
+ * Props:
+ *   navMode     — 'expanded' | 'compact' | 'overlay'
+ *   onToggleNav — callback to toggle overlay sidebar
+ */
+export function Topbar({ navMode, onToggleNav }) {
   const { pathname } = useLocation()
   const meta = titles[pathname] || { label: pathname.slice(1), sub: '' }
+
   return (
-    <header className="topbar">
-      <div>
-        <div className="topbar__breadcrumb">
-          Prism Analytics Analytics / <span>{meta.label}</span>
-        </div>
-        {meta.sub && (
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 2 }}>
-            {meta.sub}
-          </div>
+    <header className="topbar" role="banner">
+      <div className="topbar__left">
+        {navMode === 'overlay' && (
+          <button
+            className="hamburger-btn"
+            onClick={onToggleNav}
+            aria-label="Toggle navigation menu"
+            aria-expanded={false}
+            type="button"
+          >
+            <Menu size={20} />
+          </button>
         )}
+        <div>
+          <div className="topbar__breadcrumb">
+            Prism Analytics / <span>{meta.label}</span>
+          </div>
+          {meta.sub && (
+            <div className="topbar__sub">
+              {meta.sub}
+            </div>
+          )}
+        </div>
       </div>
-      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+      <div className="topbar__version">
         v1.0.0
       </div>
     </header>

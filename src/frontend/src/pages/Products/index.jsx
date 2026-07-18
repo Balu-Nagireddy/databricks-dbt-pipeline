@@ -42,12 +42,12 @@ export default function ProductsPage() {
         </ChartCard>
 
         {/* Top products table */}
-        <div className="card" style={{ marginTop: 20 }}>
+        <div className="card">
           <div className="card__title">Top 50 Products by Revenue</div>
           {products.isLoading ? (
-            <div>{[...Array(8)].map((_, i) => <div key={i} className="skeleton skeleton-text" style={{ marginBottom: 10 }} />)}</div>
+            <div>{[...Array(8)].map((_, i) => <div key={i} className="skeleton skeleton-text" />)}</div>
           ) : products.isError ? <ErrorState /> : (products.data ?? []).length === 0 ? <EmptyState /> : (
-            <div style={{ overflowX: 'auto' }}>
+            <div className="table-wrapper">
               <table className="data-table">
                 <thead>
                   <tr>
@@ -77,12 +77,12 @@ export default function ProductsPage() {
         </div>
 
         {/* Category table */}
-        <div className="card" style={{ marginTop: 20 }}>
+        <div className="card">
           <div className="card__title">All Categories Performance</div>
           {categories.isLoading ? (
-            <div>{[...Array(6)].map((_, i) => <div key={i} className="skeleton skeleton-text" style={{ marginBottom: 10 }} />)}</div>
+            <div>{[...Array(6)].map((_, i) => <div key={i} className="skeleton skeleton-text" />)}</div>
           ) : categories.isError ? <ErrorState /> : (
-            <div style={{ overflowX: 'auto' }}>
+            <div className="table-wrapper">
               <table className="data-table">
                 <thead><tr><th>Category</th><th>Units Sold</th><th>Revenue</th><th>Avg Price</th></tr></thead>
                 <tbody>

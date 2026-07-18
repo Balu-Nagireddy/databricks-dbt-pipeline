@@ -31,7 +31,7 @@ export default function ExecutivePage() {
           <ErrorState message="Unable to load KPI data from the API." />
         ) : (
           <>
-            <div className="grid grid-4" style={{ marginBottom: 24 }}>
+            <div className="grid grid-4">
               {kpiConfig(data).slice(0, 4).map((k, i) => (
                 <KPICard key={i} {...k} loading={isLoading} />
               ))}
@@ -43,25 +43,27 @@ export default function ExecutivePage() {
             </div>
 
             {data && (
-              <div className="card" style={{ marginTop: 24 }}>
+              <div className="card">
                 <div className="card__title">Platform Summary</div>
-                <table className="data-table">
-                  <thead>
-                    <tr>
-                      <th>Metric</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Total Revenue</td><td>{fmtCurrency(data.total_revenue, 2)}</td></tr>
-                    <tr><td>Total Orders</td><td>{fmt(data.total_orders)}</td></tr>
-                    <tr><td>Total Customers</td><td>{fmt(data.total_customers)}</td></tr>
-                    <tr><td>Total Sellers</td><td>{fmt(data.total_sellers)}</td></tr>
-                    <tr><td>Total Products</td><td>{fmt(data.total_products)}</td></tr>
-                    <tr><td>Avg Delivery Time</td><td>{fmtDays(data.average_delivery_time_days)}</td></tr>
-                    <tr><td>Avg Review Score</td><td>{data.average_review_score?.toFixed(2) ?? '—'} / 5.0</td></tr>
-                  </tbody>
-                </table>
+                <div className="table-wrapper">
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Total Revenue</td><td>{fmtCurrency(data.total_revenue, 2)}</td></tr>
+                      <tr><td>Total Orders</td><td>{fmt(data.total_orders)}</td></tr>
+                      <tr><td>Total Customers</td><td>{fmt(data.total_customers)}</td></tr>
+                      <tr><td>Total Sellers</td><td>{fmt(data.total_sellers)}</td></tr>
+                      <tr><td>Total Products</td><td>{fmt(data.total_products)}</td></tr>
+                      <tr><td>Avg Delivery Time</td><td>{fmtDays(data.average_delivery_time_days)}</td></tr>
+                      <tr><td>Avg Review Score</td><td>{data.average_review_score?.toFixed(2) ?? '—'} / 5.0</td></tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </>

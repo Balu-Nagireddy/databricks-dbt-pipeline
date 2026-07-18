@@ -35,12 +35,12 @@ export default function SalesPage() {
       <div className="page-header">
         <div>
           <h1 className="page-header__title">Sales Analytics</h1>
-          <p className="page-header__sub">Revenue trends, daily & monthly time-series</p>
+          <p className="page-header__sub">Revenue trends, daily &amp; monthly time-series</p>
         </div>
       </div>
 
       <div className="page-body">
-        <div className="grid grid-1" style={{ gap: 20 }}>
+        <div className="grid grid-1">
 
           {/* Daily Revenue */}
           <ChartCard title="Daily Revenue Trend (last 60 days)">
@@ -60,7 +60,7 @@ export default function SalesPage() {
           </ChartCard>
 
           {/* Monthly Revenue */}
-          <ChartCard title="Monthly Revenue & Orders">
+          <ChartCard title="Monthly Revenue &amp; Orders">
             {monthly.isLoading ? <ChartSkeleton height={240} /> :
              monthly.isError   ? <ErrorState /> :
              monthlyData.length === 0 ? <EmptyState /> : (
@@ -98,9 +98,9 @@ export default function SalesPage() {
           <div className="card">
             <div className="card__title">Revenue by State — Full Table</div>
             {byState.isLoading ? (
-              <div>{[...Array(5)].map((_, i) => <div key={i} className="skeleton skeleton-text" style={{ marginBottom: 12 }} />)}</div>
+              <div>{[...Array(5)].map((_, i) => <div key={i} className="skeleton skeleton-text" />)}</div>
             ) : byState.isError ? <ErrorState /> : (
-              <div style={{ overflowX: 'auto' }}>
+              <div className="table-wrapper">
                 <table className="data-table">
                   <thead><tr><th>State</th><th>Total Revenue</th><th>Total Orders</th></tr></thead>
                   <tbody>

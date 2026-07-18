@@ -27,12 +27,12 @@ export default function CustomersPage() {
       <div className="page-header">
         <div>
           <h1 className="page-header__title">Customer Analytics</h1>
-          <p className="page-header__sub">CLV segmentation, top cities & repeat behaviour</p>
+          <p className="page-header__sub">CLV segmentation, top cities &amp; repeat behaviour</p>
         </div>
       </div>
 
       <div className="page-body">
-        <div className="grid grid-2" style={{ marginBottom: 20 }}>
+        <div className="grid grid-2">
           {/* Segment Pie */}
           <ChartCard title="Customer Segment Distribution">
             {segments.isLoading ? <ChartSkeleton height={220} /> :
@@ -53,12 +53,12 @@ export default function CustomersPage() {
             {repeatData.isLoading ? <ChartSkeleton height={220} /> :
              repeatData.isError   ? <ErrorState /> :
              (repeatData.data ?? []).length === 0 ? <EmptyState /> : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, paddingTop: 16 }}>
+              <div className="repeat-stat">
                 {(repeatData.data ?? []).map(r => (
                   <div key={String(r.is_repeat_customer)}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6, fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                    <div className="repeat-stat__row">
                       <span>{r.is_repeat_customer ? 'Repeat Customers' : 'One-Time Customers'}</span>
-                      <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{fmt(r.customer_count)}</span>
+                      <span className="repeat-stat__count">{fmt(r.customer_count)}</span>
                     </div>
                     <div className="progress-bar">
                       <div className="progress-bar__fill" style={{ width: `${Math.min((r.customer_count / (repeatData.data.reduce((a,b) => a + b.customer_count, 0))) * 100, 100)}%`, background: r.is_repeat_customer ? '#6366f1' : '#14b8a6' }} />
@@ -71,7 +71,7 @@ export default function CustomersPage() {
         </div>
 
         {/* Top cities */}
-        <ChartCard title="Top 10 Cities by Customer Count" className="col-span-2">
+        <ChartCard title="Top 10 Cities by Customer Count">
           {cities.isLoading ? <ChartSkeleton height={240} /> :
            cities.isError   ? <ErrorState /> :
            cityData.length === 0 ? <EmptyState /> : (
@@ -88,12 +88,12 @@ export default function CustomersPage() {
         </ChartCard>
 
         {/* CLV Table */}
-        <div className="card" style={{ marginTop: 20 }}>
+        <div className="card">
           <div className="card__title">Top Customers by Lifetime Value</div>
           {segments.isLoading ? (
-            <div>{[...Array(6)].map((_, i) => <div key={i} className="skeleton skeleton-text" style={{ marginBottom: 10 }} />)}</div>
+            <div>{[...Array(6)].map((_, i) => <div key={i} className="skeleton skeleton-text" />)}</div>
           ) : segments.isError ? <ErrorState /> : (
-            <div style={{ overflowX: 'auto' }}>
+            <div className="table-wrapper">
               <table className="data-table">
                 <thead><tr><th>Customer ID</th><th>Orders</th><th>Lifetime Value</th><th>Avg Spend</th><th>Segment</th></tr></thead>
                 <tbody>
